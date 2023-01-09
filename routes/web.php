@@ -14,7 +14,7 @@ use App\Http\Controllers\PetitionController;
 |
 */
 
-Route::get('/petitions',[PetitionController::class,'viewPetition']);
+Route::get('/petitions',[PetitionController::class,'viewPetition'])->name('petitions.index');
 
 Route::get('/', function () {
     return view('welcome');

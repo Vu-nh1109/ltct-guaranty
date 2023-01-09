@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Petition;
+use App\Petition;
 use Illuminate\Http\Request;
 
 class PetitionController extends Controller

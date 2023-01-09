@@ -31,6 +31,34 @@ class ApiController extends Controller
         $data['type'] = $request->input('type');
 
         return view('success',['success' => $data->save()]);
-        
+    }
+
+    public function sendExchangeRequest($order_id){
+        $client = new \GuzzleHttp\Client();
+        $request = $client->post('https://sp-05-backend.onrender.com/api/confirm/exchange/'.$order_id);
+        return $response = $request->getBody();
+    }
+
+    public function sendReturnRequest($order_id){
+        $client = new \GuzzleHttp\Client();
+        $request = $client->post('https://sp-05-backend.onrender.com/api/confirm/return/'.$order_id);
+        return $response = $request->getBody();
+    }
+
+    public function getProductQuantity($product_id){
+        $client = new \GuzzleHttp\Client();
+        $request = $client->get('https://ltct-warehouse-backend.onrender.com/api/product/item/'.$product_id);
+        return $response = $request->getBody();
+    }
+}
+
+function hasImage($request,$image){
+    if($request->file($image)){
+        $file= $request->file($image);
+        $filename = date('YmdHi').$file->getClientOriginalName();
+        $file-> move(public_path('Image'), $filename);
+        return $filename;
+    } else {
+        return null;
     }
 }

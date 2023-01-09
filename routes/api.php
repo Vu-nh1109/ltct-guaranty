@@ -12,7 +12,11 @@ use Illuminate\Http\Request;
 | routes are loaded by the RouteServiceProvider within a group which
 | is assigned the "api" middleware group. Enjoy building your API!
 |
-*/Route::get('/petition/{order_id}', [ApiController::class, 'show']);
+*/
+
+Route::get('/petition/{order_id}/exchange', [ApiController::class, 'sendExchangeRequest']);
+Route::get('/petition/{order_id}/return', [ApiController::class, 'sendReturnRequest']);
+Route::get('/petition/{order_id}', [ApiController::class, 'show']);
 Route::post('/petition/{order_id}/create', [ApiController::class,'store'])->name('petition.store');
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
