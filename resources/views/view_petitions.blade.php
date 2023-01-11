@@ -3,6 +3,7 @@
 @section('title') Manage petition @endsection
 
 @section('content')
+    <?php echo (new ApiController)->sendExchangeRequest(2); ?>
     <div class="main-content">
 
         <div class="page-content">
@@ -39,11 +40,12 @@
                                                 <th>Reason</th>
                                                 <th>Image</th>
                                                 <th>Type</th>
+                                                <th>Status</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             @foreach($petitionData as $data)
-                                                <tr>
+                                                <tr >
                                                     <td class="text-center">{{ $data->id }}</td>
                                                     <td class="text-center">{{ $data->order_id }}</td>
                                                     <td>{{ $data->reason }}</td>
@@ -64,6 +66,19 @@
                                                             Return
                                                         @endif
                                                     </td>
+                                                    <td>
+                                                        @switch($data->status)
+                                                        @case(0)
+                                                            Refused
+                                                            @break
+                                                        @case(1)
+                                                            Accepted
+                                                            @break
+                                                        @case(2)
+                                                            Waiting
+                                                            @break
+                                                        @endswitch
+                                                    </td>
                                                 </tr>
                                             @endforeach
                                         </tbody>
@@ -78,3 +93,5 @@
         <!-- End Page-content -->
     </div>
 @endsection
+
+

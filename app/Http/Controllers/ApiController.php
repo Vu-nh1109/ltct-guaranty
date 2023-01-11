@@ -36,7 +36,8 @@ class ApiController extends Controller
     public function sendExchangeRequest($order_id){
         $client = new \GuzzleHttp\Client();
         $request = $client->post('https://sp-05-backend.onrender.com/api/confirm/exchange/'.$order_id);
-        return $response = $request->getBody();
+        $response = json_decode($request->getBody(), true);
+        return $response['status'];
     }
 
     public function sendReturnRequest($order_id){

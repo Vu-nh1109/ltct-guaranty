@@ -14,12 +14,14 @@ use App\Http\Controllers\PetitionController;
 |
 */
 
-Route::get('/petitions',[PetitionController::class,'viewPetition'])->name('petitions.index');
+Route::get('/petitions',[PetitionController::class,'viewPetitions'])->name('petitions.index');
+Route::get('/petitions/{id}',[PetitionController::class,'showPetition'])->name('petitions.show');
+Route::put('/petitions/{id}',[PetitionController::class,'handlePetition'])->name('petition.handle');
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
+//Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+//Route::get('/home', 'HomeController@index')->name('home');
