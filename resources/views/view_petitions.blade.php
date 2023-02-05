@@ -3,7 +3,6 @@
 @section('title') Manage petition @endsection
 
 @section('content')
-    <?php echo (new ApiController)->sendExchangeRequest(2); ?>
     <div class="main-content">
 
         <div class="page-content">
@@ -37,10 +36,11 @@
                                             <tr>
                                                 <th style="width: 70px;" class="text-center">Id</th>
                                                 <th style="width: 70px;" class="text-center">Order Id</th>
+                                                <th style="width: 70px;" class="text-center">Product Id</th>
                                                 <th>Reason</th>
                                                 <th>Image</th>
-                                                <th>Type</th>
-                                                <th>Status</th>
+                                                <th style="width: 70px;" class="text-center">Type</th>
+                                                <th style="width: 70px;" class="text-center">Status</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -48,15 +48,16 @@
                                                 <tr >
                                                     <td class="text-center">{{ $data->id }}</td>
                                                     <td class="text-center">{{ $data->order_id }}</td>
+                                                    <td class="text-center">{{ $data->product_id }}</td>
                                                     <td>{{ $data->reason }}</td>
                                                     <td>
-                                                        <img src="{{ url('Image/'.$data->image1) }}" style="height: 100px; width: 150px;">
+                                                        <img src="{{ url('Image/'.$data->image1) }}" style="height: 100px;">
                                                         @if($data->image2)
                                                             <img src="{{ url('Image/'.$data->image2) }}"
                                                         style="height: 100px; width: 150px;">
                                                         @endif
                                                         @if($data->image3)
-                                                            <img src="{{ url('Image/'.$data->image3) }}" style="height: 100px; width: 150px;">
+                                                            <img src="{{ url('Image/'.$data->image3) }}" style="height: 100px;">
                                                         @endif
                                                     </td>
                                                     <td>

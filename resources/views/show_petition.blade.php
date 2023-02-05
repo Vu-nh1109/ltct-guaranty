@@ -17,6 +17,11 @@
                         </div>
 
                         <div class="form-group">
+                            <label class="control-label">Product id:</label>
+                            <input disabled name="product_id" type="text" class="form-control" value="{{ $petition->product_id }}">
+                        </div>
+
+                        <div class="form-group">
                             <label class="control-label" for="reason">Reason:</label>
                             <input disabled name="reason" type="text" class="form-control" value="{{ $petition->reason }}">
                         </div>

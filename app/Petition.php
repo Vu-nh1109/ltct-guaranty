@@ -9,6 +9,7 @@ class Petition extends Model
     
     protected $fillable = [
         'order_id',
+        'product_id',
         'reason',
         'image1',
         'image2',

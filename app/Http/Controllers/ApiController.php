@@ -7,21 +7,31 @@ use Illuminate\Http\Request;
 
 class ApiController extends Controller
 {
-    public function show($order_id){
-        return view('add_petition',['order_id' => $order_id] );
+    public function show($order_id,$product_id){
+        if($petition = Petition::where([
+            ['order_id', '=', $order_id],
+            ['product_id', '=', $product_id],
+        ])->first()){
+            return view('show_petition', [
+                'petition' => $petition
+            ]);
+        } else {
+            return view('add_petition',['order_id' => $order_id,'product_id' => $product_id] );
+        }
     }
 
-    public function store(Request $request, $order_id){
+    public function store(Request $request, $order_id, $product_id){
         $request->validate([
             'reason' => 'required',
-            'image1' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:4096',
-            'image2' => 'image|mimes:jpg,png,jpeg,gif,svg|max:4096',
-            'image3' => 'image|mimes:jpg,png,jpeg,gif,svg|max:4096',
+            'image1' => 'required|image|mimes:jpg,png,jpeg,gif,svg,webp|max:4096',
+            'image2' => 'image|mimes:jpg,png,jpeg,gif,svg,webp|max:4096',
+            'image3' => 'image|mimes:jpg,png,jpeg,gif,svg,webp|max:4096',
         ]);
         
         $data = new Petition();
 
         $data['order_id'] = $order_id;
+        $data['product_id'] = $product_id;
         $data['reason'] = $request->input('reason');
         
         $data['image1'] = hasImage($request,'image1');
@@ -29,7 +39,6 @@ class ApiController extends Controller
         $data['image3'] = hasImage($request,'image3');
 
         $data['type'] = $request->input('type');
-
         return view('success',['success' => $data->save()]);
     }
 
