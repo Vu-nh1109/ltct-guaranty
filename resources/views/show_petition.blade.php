@@ -28,12 +28,12 @@
 
                         <div class="form-group">
                             <label class="control-label">Image:</label><br>
-                            <img src="{{ url('Image/'.$petition->image1) }}" style="height: 100px; width: 150px;">
+                            <img src="{{ url('Image/'.$petition->image1) }}" style="height: 100px">
                             @if($petition->image2)
-                                <img src="{{ url('Image/'.$petition->image2) }}" style="height: 100px; width: 150px;">
+                                <img src="{{ url('Image/'.$petition->image2) }}" style="height: 100px">
                             @endif
                             @if($petition->image3)
-                                <img src="{{ url('Image/'.$petition->image3) }}" style="height: 100px; width: 150px;">
+                                <img src="{{ url('Image/'.$petition->image3) }}" style="height: 100px">
                             @endif
                         </div>
 
