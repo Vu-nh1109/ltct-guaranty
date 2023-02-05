@@ -49,7 +49,11 @@
                         @switch($petition->status)
                             @case(2)
                             <div class="form-group">
-                            <button disabled type="submit">Processing your request!</button>
+                                <button type="submit" class="btn btn-success" name="action" value="accept">Accept</button>
+                                <button type="submit" class="btn btn-danger" name="action" value="refuse">Refuse</button>
+                                @if(!$petition->type)
+                                <button type="submit" class="btn btn-primary" name="action" value="return">Switch to return</button>
+                                @endif
                             </div>
                             @break
                             @case(1)

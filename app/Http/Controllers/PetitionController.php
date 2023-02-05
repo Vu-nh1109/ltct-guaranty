@@ -14,17 +14,25 @@ class PetitionController extends Controller
 
     public function showPetition($id){
         $petition = Petition::findOrFail($id);
-        return view('show_petition', [
+        return view('admin_petition', [
             'petition' => $petition
         ]);
     }
 
     public function handlePetition(Request $request,$id){
         $petition = Petition::find($id);
-        if($request->input('action')=='accept')
-            acceptPetition($petition);
-        else if($request->input('action')=='refuse')
-            $petition->status=0;
+        switch($request->input('action')) {
+            case 'accept':
+                acceptPetition($petition);
+                break;
+            case 'refuse':
+                $petition->status=0;
+                break;
+            case 'return':
+                $petition->type=1;
+                acceptPetition($petition);
+                break;
+        }
         $petition->save();
         return back();
     }

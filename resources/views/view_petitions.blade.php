@@ -37,8 +37,8 @@
                                                 <th style="width: 70px;" class="text-center">Id</th>
                                                 <th style="width: 70px;" class="text-center">Order Id</th>
                                                 <th style="width: 70px;" class="text-center">Product Id</th>
-                                                <th>Reason</th>
-                                                <th>Image</th>
+                                                <th class="text-center">Reason</th>
+                                                <th class="text-center">Image</th>
                                                 <th style="width: 70px;" class="text-center">Type</th>
                                                 <th style="width: 70px;" class="text-center">Status</th>
                                             </tr>
@@ -60,14 +60,14 @@
                                                             <img src="{{ url('Image/'.$data->image3) }}" style="height: 100px;">
                                                         @endif
                                                     </td>
-                                                    <td>
+                                                    <td class="text-center">
                                                         @if(!$data->type)
                                                             Exchange
                                                         @else 
                                                             Return
                                                         @endif
                                                     </td>
-                                                    <td>
+                                                    <td class="text-center">
                                                         @switch($data->status)
                                                         @case(0)
                                                             Refused
