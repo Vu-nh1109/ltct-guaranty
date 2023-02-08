@@ -12,22 +12,22 @@
             <div class="row">
                 <div class="col">
                     <div class="form-group">
-                        <label class="control-label">Order id:</label>
+                        <label style="font-weight: bold;" class="control-label">Order id:</label>
                         <input disabled name="order_id" type="text" class="form-control" value="{{ $order_id }}">
                     </div>
 
                     <div class="form-group">
-                        <label class="control-label">Product_id:</label>
+                        <label style="font-weight: bold;" class="control-label">Product_id:</label>
                         <input disabled name="product_id" type="text" class="form-control" value="{{ $product_id }}">
                     </div>
 
                     <div class="form-group">
-                        <label class="control-label" for="reason">Reason: <span class="text-danger">*</span></label>
+                        <label style="font-weight: bold;" class="control-label" for="reason">Reason: <span class="text-danger">*</span></label>
                         <input name="reason" type="text" class="form-control" id="reason" required placeholder="Enter reason">
                     </div>
 
                     <div class="form-group">
-                        <label class="control-label">Image: <span class="text-danger">*</span></label>
+                        <label style="font-weight: bold;" class="control-label">Image: <span class="text-danger">*</span></label>
                         <input name="image1" accept="image/*" id="imgInp1" type="file" class="form-control" required placeholder="Enter image">
                         <img id="blah1" src="#" alt="" style="width: 200px;" />
                         <input name="image2" accept="image/*" id="imgInp2" type="file" class="form-control" placeholder="Enter image">
@@ -47,6 +47,7 @@
                         </div>
                     </div>
 
+                    <br></br>
                     <div class="form-group">
                         <button type="submit" class="btn btn-success">Submit</button>
                     </div>

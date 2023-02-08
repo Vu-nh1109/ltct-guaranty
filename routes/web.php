@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\ApiController;
 use App\Http\Controllers\PetitionController;
 
 /*
@@ -18,6 +17,9 @@ Route::get('/petitions',[PetitionController::class,'viewPetitions'])->name('peti
 Route::get('/petitions/{id}',[PetitionController::class,'showPetition'])->name('petitions.show');
 Route::put('/petitions/{id}',[PetitionController::class,'handlePetition'])->name('petition.handle');
 
+Route::get('/order/{order_id}/exchange', [PetitionController::class, 'sendExchangeRequest']);
+Route::get('/order/{order_id}/return', [PetitionController::class, 'sendReturnRequest']);
+Route::get('/product/{product_id}/quantity', [PetitionController::class, 'getProductQuantity']);
 
 // Route::get('/', function () {
 //     return view('welcome');

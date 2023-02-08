@@ -10,22 +10,22 @@
         <div class="row">
             <div class="col">
                 <div class="form-group">
-                    <label class="control-label">Order id:</label>
-                    <input disabled name="order_id" type="text" class="form-control" value="{{ $petition->order_id }}">
+                    <label style="font-weight: bold;"class="control-label">Order id:</label>
+                    {{ $petition->order_id }}
                 </div>
 
                 <div class="form-group">
-                    <label class="control-label">Product id:</label>
-                    <input disabled name="product_id" type="text" class="form-control" value="{{ $petition->product_id }}">
+                    <label style="font-weight: bold;" class="control-label">Product id:</label>
+                    {{ $petition->product_id }}
                 </div>
 
                 <div class="form-group">
-                    <label class="control-label" for="reason">Reason:</label>
-                    <input disabled name="reason" type="text" class="form-control" value="{{ $petition->reason }}">
+                    <label style="font-weight: bold;" class="control-label" for="reason">Reason:</label>
+                    {{ $petition->reason }}
                 </div>
 
                 <div class="form-group">
-                    <label class="control-label">Image:</label><br>
+                    <label style="font-weight: bold;" class="control-label">Images:</label><br>
                     <div>
                         <img data-enlargeable src="{{ url('Image/'.$petition->image1) }}" style="width: 300px; cursor: zoom-in">
                         @if($petition->image2)
@@ -42,14 +42,15 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="control-label">Type:</label>
+                    <label style="font-weight: bold;" class="control-label">Type:</label>
                     @if(!$petition->type)
-                    <input disabled name="reason" type="text" class="form-control" value="Exchange">
+                    Exchange
                     @else
-                    <input disabled name="reason" type="text" class="form-control" value="Return">
+                    Return
                     @endif
                 </div>
 
+                <br></br>
                 @switch($petition->status)
                 @case(2)
                 <div class="form-group">

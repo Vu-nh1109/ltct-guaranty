@@ -28,11 +28,11 @@ class PetitionController extends Controller
             $query = $query->where('reason', 'like', '%' . $request->input('reason') . '%');
             $done = 1;
         }
-        if ($request->input('type')!='') {
+        if ($request->input('type') != '') {
             $query = $query->where('type', $request->input('type'));
             $done = 1;
         }
-        if ($request->input('status')!='') {
+        if ($request->input('status') != '') {
             $query = $query->where('status', $request->input('status'));
             $done = 1;
         }
@@ -49,7 +49,8 @@ class PetitionController extends Controller
     {
         $petition = Petition::findOrFail($id);
         return view('admin_petition', [
-            'petition' => $petition
+            'petition' => $petition,
+            'quantity' => $this->getProductQuantity($petition->product_id)
         ]);
     }
 
@@ -58,30 +59,57 @@ class PetitionController extends Controller
         $petition = Petition::find($id);
         switch ($request->input('action')) {
             case 'accept':
-                acceptPetition($petition);
+                if (!$petition->type && $this->getProductQuantity($petition->product_id) <= 0) {
+                } else {
+                    $this->acceptPetition($petition);
+                }
                 break;
             case 'refuse':
                 $petition->status = 0;
                 break;
             case 'return':
                 $petition->type = 1;
-                acceptPetition($petition);
+                $this->acceptPetition($petition);
                 break;
         }
         $petition->save();
         return back();
     }
-}
 
-function acceptPetition(Petition $petition)
-{
-    if (!$petition->type) {
-        $result = (new ApiController)->sendExchangeRequest($petition->order_id);
-    } else {
-        $result = (new ApiController)->sendReturnRequest($petition->order_id);
+    public function sendExchangeRequest($order_id)
+    {
+        $client = new \GuzzleHttp\Client();
+        $request = $client->post('https://sp-05-backend.onrender.com/api/confirm/exchange/' . $order_id);
+        $response = json_decode($request->getBody(), true);
+        return $response['status'];
     }
 
-    if ($result = 'success') {
-        $petition->status = 1;
+    public function sendReturnRequest($order_id)
+    {
+        $client = new \GuzzleHttp\Client();
+        $request = $client->post('https://sp-05-backend.onrender.com/api/confirm/return/' . $order_id);
+        $response = json_decode($request->getBody(), true);
+        return $response['status'];
+    }
+
+    public function getProductQuantity($product_id)
+    {
+        $client = new \GuzzleHttp\Client();
+        $request = $client->request('GET', 'https://ltct-warehouse-backend.onrender.com/api/product/item/' . $product_id);
+        $response = json_decode($request->getBody(), true);
+        return $response['quantity'];
+    }
+
+    protected function acceptPetition(Petition $petition)
+    {
+        if (!$petition->type) {
+            $result = $this->sendExchangeRequest($petition->order_id);
+        } else {
+            $result = $this->sendReturnRequest($petition->order_id);
+        }
+
+        if ($result = 'success') {
+            $petition->status = 1;
+        }
     }
 }

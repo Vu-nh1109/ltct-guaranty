@@ -27,9 +27,9 @@
                                     <table style="width: 100%; display: table; table-layout: fixed;" class="table table-centered table-nowrap" id="tableID">
                                         <thead class="thead-light">
                                             <tr>
-                                                <th style="width: 7%;" class="text-center">Id</th>
+                                                <th style="width: 6%;" class="text-center">Id</th>
                                                 <th style="width: 7%;" class="text-center">Order Id</th>
-                                                <th style="width: 7%;" class="text-center">Product Id</th>
+                                                <th style="width: 8%;" class="text-center">Product Id</th>
                                                 <th style="width: 22%;" class="text-center">Reason</th>
                                                 <th style="width: 30%;" class="text-center" colspan="3">Image</th>
                                                 <th style="width: 10%;" class="text-center">Type</th>

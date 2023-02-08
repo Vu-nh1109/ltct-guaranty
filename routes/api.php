@@ -14,11 +14,11 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::get('/petition/{order_id}/exchange', [ApiController::class, 'sendExchangeRequest']);
-Route::get('/petition/{order_id}/return', [ApiController::class, 'sendReturnRequest']);
+
 Route::get('/petition/{order_id}/{product_id}', [ApiController::class, 'show']);
 Route::post('/petition/{order_id}/{product_id}/create', [ApiController::class,'store'])->name('petition.store');
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+
+// Route::middleware('auth:api')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
