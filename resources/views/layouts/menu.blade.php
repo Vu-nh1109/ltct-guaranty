@@ -7,10 +7,10 @@
             <!-- Left Menu Start -->
             <ul class="metismenu list-unstyled" id="side-menu">
                 <li class="menu-title">Manage</li>
-                
+
                 <li>
-                    <a href="{{ route('petitions.index') }}" class=" waves-effect">
-                        <i class="bx bx-calendar"></i>
+                    <a href="{{ route('petitions.index') }}" class="waves-effect">
+                        <i><iconify-icon icon="bx:calendar"></iconify-icon></i>
                         <span>Petition</span>
                     </a>
                 </li>

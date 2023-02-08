@@ -18,38 +18,34 @@
 
 
     <!-- Bootstrap Css -->
-    <link href="{{ asset('css/bootstrap.min.css') }}" id="bootstrap-style" rel="stylesheet" type="text/css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css">
     <!-- Toastr Css -->
-    <link rel="stylesheet" type="text/css" href="{{ asset('libs\toastr\build\toastr.min.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/fontawesome.min.css" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.css" type="text/css">
+    <link rel="stylesheet" href="https://unpkg.com/reset-css/reset.css" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fsvs/1.2.2/css/style.css" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.css" type="text/css">
 
-    <link rel="stylesheet" href="{{ asset('css/font-awesome.css') }}" type="text/css">
-    <link rel="stylesheet" href="{{ asset('css/animate.css') }}" type="text/css">
-    <link rel="stylesheet" href="{{ asset('css/reset.css') }}" type="text/css">
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}" type="text/css">
-    <link rel="stylesheet" href="{{ asset('css/media.css') }}" type="text/css">
-    <link rel="stylesheet" href="{{ asset('slick/slick.css') }}" type="text/css">
-
-    <script src="{{ asset('libs/jquery/jquery.min.js') }}"></script>
-    <script src="{{ asset('libs/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-    <script src="{{ asset('js/script.js') }}"></script>
-    <script src="{{ asset('slick/slick.js') }}"></script>
-    <!-- toastr plugin -->
-    <script src="{{ asset('libs\toastr\build\toastr.min.js') }}"></script>
-
-
-    @yield('js')
-    @stack('js')
-    
-    
 </head>
 
 <body>
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/script.js/2.5.9/script.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+    <!-- toastr plugin -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js"></script>
 
-    <!--          Content -->
+    <!-- Content -->
     @yield('content')
-    <!--          Content -->
+    <!-- Content -->
 
+
+
+    @yield('js')
+    @stack('js')
 
 </body>
 

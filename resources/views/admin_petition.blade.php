@@ -3,9 +3,10 @@
 @section('title') Showing petition @endsection
 
 @section('content')
+<br></br>
 <div class="bg-news-list">
     <div class="container p-top50">
-        <h2 class="text-center mb-3 h2">Add order</h2>
+        <h2 class="text-center mb-3 h2">Showing petition</h2>
         <form method="post" action="{{ route('petition.handle', ['id'=> $petition->id ]) }}" enctype="multipart/form-data" class="form-horizontal">
             @csrf
             @method('PUT')
@@ -29,16 +30,16 @@
                     <div class="form-group">
                         <label class="control-label">Image:</label><br>
                         <div>
-                            <img data-enlargeable src="{{ url('Image/'.$petition->image1) }}" style="width: 300px; cursor: zoom-in"">
+                            <img data-enlargeable src="{{ url('Image/'.$petition->image1) }}" style="width: 300px; cursor: zoom-in">
                         </div>
                         <div>
                             @if($petition->image2)
-                            <img data-enlargeable src="{{ url('Image/'.$petition->image2) }}" style="width: 300px; cursor: zoom-in"">
+                            <img data-enlargeable src="{{ url('Image/'.$petition->image2) }}" style="width: 300px; cursor: zoom-in">
                             @endif
                         </div>
                         <div>
                             @if($petition->image3)
-                            <img data-enlargeable src="{{ url('Image/'.$petition->image3) }}" style="width: 300px; cursor: zoom-in"">
+                            <img data-enlargeable src="{{ url('Image/'.$petition->image3) }}" style="width: 300px; cursor: zoom-in">
                             @endif
                         </div>
                     </div>

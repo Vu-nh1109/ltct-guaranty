@@ -17,33 +17,23 @@
     @stack('css')
 
     <!-- Toastr Css -->
-    <link rel="stylesheet" type="text/css" href="{{ asset('libs\toastr\build\toastr.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.css"">
 
     <!-- Bootstrap Css -->
-    <link href="{{ asset('css/bootstrap.min.css') }}" id="bootstrap-style" rel="stylesheet" type="text/css">
+    <link href=" https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css">
     <!-- Icons Css -->
-    <link href="{{ asset('css/icons.min.css') }}" rel="stylesheet" type="text/css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/PhononJs/1.5.1/css/components/icons.min.css" rel="stylesheet" type="text/css">
     <!-- App Css-->
     <link href="{{ asset('css/app.min.css') }}" id="app-style" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css" type="text/css">
 
     <style type="text/css">
         .modal-body {
             white-space: normal;
         }
-
     </style>
 
-    <script src="{{ asset('libs/jquery/jquery.min.js') }}"></script>
-    <script src="{{ asset('libs/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-    <script src="{{ asset('libs/metismenu/metisMenu.min.js') }}"></script>
-    <script src="{{ asset('libs/simplebar/simplebar.min.js') }}"></script>
-    <script src="{{ asset('libs/node-waves/waves.min.js') }}"></script>
 
-    @yield('js')
-    @stack('js')
-
-    <!-- App js -->
-    <script src="{{ asset('js/app.js') }}"></script>
 </head>
 
 <body data-sidebar="dark">
@@ -57,49 +47,29 @@
                     <div class="navbar-brand-box">
                         <a href="" class="logo logo-dark">
                             <span class="logo-sm">
-                                <img src="{{ asset('images\logo-light.svg') }}" alt="" height="22">
+                                <img src="{{ asset('images/logo-light.svg') }}" alt="" height="22">
                             </span>
                             <span class="logo-lg">
-                                <img src="{{ asset('images\logo-dark.png') }}" alt="" height="17">
+                                <img src="{{ asset('images/logo-dark.png') }}" alt="" height="17">
                             </span>
                         </a>
 
                         <a href="" class="logo logo-light">
                             <span class="logo-sm">
-                                <img src="{{ asset('images\logo-light.svg') }}" alt="" height="22">
+                                <img src="{{ asset('images/logo-light.svg') }}" alt="" height="22">
                             </span>
                             <span class="logo-lg">
-                                <img src="{{ asset('images\logo-light.svg') }}" alt="" height="50">
+                                <img src="{{ asset('images/logo-light.svg') }}" alt="" height="50">
                             </span>
                         </a>
                     </div>
-
-                    <button type="button" class="btn btn-sm px-3 font-size-16 header-item waves-effect" id="vertical-menu-btn">
-                        <i class="fa fa-fw fa-bars"></i>
-                    </button>
 
                 </div>
 
                 <div class="d-flex">
 
                     <div class="dropdown d-inline-block">
-                        <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <img class="rounded-circle header-profile-user" src="{{ asset('/images/user.jpg') }}" alt="">
-                            <span class="d-none d-xl-inline-block ml-1">Admin</span>
-                            <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
-                        </button>
-                        <div class="dropdown-menu dropdown-menu-right">
-                            item
-                            <a class="dropdown-item" href=""><i class="bx bx-user font-size-16 align-middle mr-1"></i> Profile</a>
-                            <a class="dropdown-item" href=""><i class="bx bx-key font-size-16 align-middle mr-1"></i> Change password</a>
-                            <div class="dropdown-divider"></div>
-                            <form method="POST" action="">
-                                @csrf
-                                <a class="dropdown-item text-danger" href="" onclick="event.preventDefault(); this.closest('form').submit();">
-                                    <i class="bx bx-power-off font-size-16 align-middle mr-1 text-danger"></i> Logout
-                                </a>
-                            </form>
-                        </div>
+                            <span class="d-none d-xl-inline-block ml-1">Guaranty SP_16</span>
                     </div>
 
                 </div>
@@ -119,7 +89,18 @@
     </div>
     <!-- END layout-wrapper -->
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/metisMenu/3.0.6/metisMenu.js"></script>
+    <script src="https://unpkg.com/simplebar@6.0.0-beta.10/dist/simplebar.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/node-waves/0.7.6/waves.min.js"></script>
+    <script src="https://code.iconify.design/iconify-icon/1.0.4/iconify-icon.min.js"></script>
 
+    @yield('js')
+    @stack('js')
+
+    <!-- App js -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/hyperapp/0.0.11/app.min.js"></script>
 
 
 </body>

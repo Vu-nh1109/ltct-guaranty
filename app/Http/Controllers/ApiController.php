@@ -27,7 +27,7 @@ class ApiController extends Controller
             'image2' => 'image|mimes:jpg,png,jpeg,gif,svg,webp|max:4096',
             'image3' => 'image|mimes:jpg,png,jpeg,gif,svg,webp|max:4096',
         ]);
-        
+
         $data = new Petition();
 
         $data['order_id'] = $order_id;
@@ -39,7 +39,10 @@ class ApiController extends Controller
         $data['image3'] = hasImage($request,'image3');
 
         $data['type'] = $request->input('type');
-        return view('success',['success' => $data->save()]);
+        $data->save();
+        
+        return back();
+        
     }
 
     public function sendExchangeRequest($order_id){
