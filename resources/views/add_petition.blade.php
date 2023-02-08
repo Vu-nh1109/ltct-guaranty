@@ -17,7 +17,7 @@
 
                         <div class="form-group">
                             <label class="control-label">Product_id:</label>
-                            <input disabled name="order_id" type="text" class="form-control" value="{{ $product_id }}">
+                            <input disabled name="product_id" type="text" class="form-control" value="{{ $product_id }}">
                         </div>
 
                         <div class="form-group">

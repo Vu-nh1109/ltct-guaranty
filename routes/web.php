@@ -18,9 +18,10 @@ Route::get('/petitions',[PetitionController::class,'viewPetitions'])->name('peti
 Route::get('/petitions/{id}',[PetitionController::class,'showPetition'])->name('petitions.show');
 Route::put('/petitions/{id}',[PetitionController::class,'handlePetition'])->name('petition.handle');
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 //Auth::routes();
 
