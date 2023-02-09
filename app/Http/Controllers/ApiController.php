@@ -36,25 +36,25 @@ class ApiController extends Controller
         $data['product_id'] = $product_id;
         $data['reason'] = $request->input('reason');
 
-        $data['image1'] = hasImage($request, 'image1');
-        $data['image2'] = hasImage($request, 'image2');
-        $data['image3'] = hasImage($request, 'image3');
+        $data['image1'] = $this->hasImage($request, 'image1');
+        $data['image2'] = $this->hasImage($request, 'image2');
+        $data['image3'] = $this->hasImage($request, 'image3');
 
         $data['type'] = $request->input('type');
         $data->save();
 
         return back();
     }
-}
 
-function hasImage($request, $image)
-{
-    if ($request->file($image)) {
-        $file = $request->file($image);
-        $filename = date('YmdHi') . $file->getClientOriginalName();
-        $file->move(public_path('Image'), $filename);
-        return $filename;
-    } else {
-        return null;
+    protected function hasImage($request, $image)
+    {
+        if ($request->file($image)) {
+            $file = $request->file($image);
+            $filename = date('YmdHi') . $file->getClientOriginalName();
+            $file->move(public_path('Image'), $filename);
+            return $filename;
+        } else {
+            return null;
+        }
     }
 }

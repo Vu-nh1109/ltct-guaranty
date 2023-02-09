@@ -43,6 +43,7 @@
                             @endif
                         </div>
                     </div>
+                    <br></br>
 
                     <div class="form-group">
                         <label style="font-weight: bold;" class="control-label">Type:</label>
@@ -52,8 +53,6 @@
                         Return
                         @endif
                     </div>
-
-                    <br></br>
                     @switch($petition->status)
                     @case(2)
                     <div class="form-group">
@@ -64,7 +63,7 @@
                     </div>
                     <div class="form-group">
                         @if(!$quantity)
-                        <button disabled type="submit" class="btn btn-success" title="Not enough quantity to accept">Accept</button>
+                        <button disabled class="btn btn-success" data-toggle="tooltip" title="Not enough quantity to accept">Accept</button>
                         @else
                         <button type="submit" class="btn btn-success" name="action" value="accept">Accept</button>
                         @endif
@@ -76,12 +75,12 @@
                     @break
                     @case(1)
                     <div class="form-group">
-                        <button disabled type="submit" class="btn btn-success">Accepted</button>
+                        <button disabled class="btn btn-success">Accepted</button>
                     </div>
                     @break
                     @case(0)
                     <div class="form-group">
-                        <button disabled type="submit" class="btn btn-danger">Refused</button>
+                        <button disabled class="btn btn-danger">Refused</button>
                     </div>
                     @break
                     @endswitch
@@ -91,6 +90,7 @@
 
     </div>
 </div>
+<br></br>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script type="text/javascript">
