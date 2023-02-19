@@ -10,39 +10,28 @@ class PetitionController extends Controller
 {
     public function viewPetitions(Request $request)
     {
-        $query = DB::table('petitions');
-        $done = 0;
+        $query = DB::table('petitions')->orderBy('created_at', 'desc');
         if ($request->input('id')) {
             $query = $query->where('id', $request->input('id'));
-            $done = 1;
         }
         if ($request->input('order_id')) {
             $query = $query->where('order_id', $request->input('order_id'));
-            $done = 1;
         }
         if ($request->input('product_id')) {
             $query = $query->where('product_id', $request->input('product_id'));
-            $done = 1;
         }
         if ($request->input('reason')) {
             $query = $query->where('reason', 'like', '%' . $request->input('reason') . '%');
-            $done = 1;
         }
         if ($request->input('type') != '') {
             $query = $query->where('type', $request->input('type'));
-            $done = 1;
         }
         if ($request->input('status') != '') {
             $query = $query->where('status', $request->input('status'));
-            $done = 1;
         }
 
-        if (!$done) {
-            $petitionData = $query->paginate(5);
-        } else {
-            $petitionData = $query->get();
-        }
-        return view('view_petitions', compact('petitionData'), ['done' => $done]);
+        $petitionData = $query->paginate(10);
+        return view('view_petitions', compact('petitionData'),);
     }
 
     public function showPetition($id)
@@ -110,6 +99,9 @@ class PetitionController extends Controller
 
         if ($result = 'success') {
             $petition->status = 1;
+            toastr()->success('Petition Request Accepted Successfully!');
+        } else {
+            toastr()->error("Couldn't connect to Accounting Module");
         }
     }
 }

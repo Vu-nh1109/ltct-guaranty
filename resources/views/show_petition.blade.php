@@ -41,6 +41,7 @@
                     </div>
                 </div>
 
+                <br></br>
                 <div class="form-group">
                     <label style="font-weight: bold;" class="control-label">Type:</label>
                     @if(!$petition->type)
@@ -50,7 +51,6 @@
                     @endif
                 </div>
 
-                <br></br>
                 @switch($petition->status)
                 @case(2)
                 <div class="form-group">

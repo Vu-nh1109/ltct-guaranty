@@ -14,7 +14,7 @@ use Illuminate\Http\Request;
 |
 */
 
-
+Route::get('/order/{order_id}', [ApiController::class, 'getOrder']);
 Route::get('/petition/{order_id}/{product_id}', [ApiController::class, 'show']);
 Route::post('/petition/{order_id}/{product_id}/create', [ApiController::class,'store'])->name('petition.store');
 

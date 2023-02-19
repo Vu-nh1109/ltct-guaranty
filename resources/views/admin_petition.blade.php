@@ -28,7 +28,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label style="font-weight: bold;" class="control-label">Image:</label><br>
+                        <label style="font-weight: bold;" class="control-label">Images:</label><br>
                         <div>
                             <img data-enlargeable src="{{ url('Image/'.$petition->image1) }}" style="width: 300px; cursor: zoom-in">
                         </div>

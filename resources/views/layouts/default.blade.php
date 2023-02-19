@@ -17,7 +17,7 @@
     @stack('css')
 
     <!-- Toastr Css -->
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.css"">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
     <!-- Bootstrap Css -->
     <link href=" https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css">
@@ -69,7 +69,7 @@
                 <div class="d-flex">
 
                     <div class="dropdown d-inline-block">
-                            <span class="d-none d-xl-inline-block ml-1">Guaranty SP_16</span>
+                        <span class="d-none d-xl-inline-block ml-1">Guaranty SP_16</span>
                     </div>
 
                 </div>
@@ -95,6 +95,7 @@
     <script src="https://unpkg.com/simplebar@6.0.0-beta.10/dist/simplebar.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/node-waves/0.7.6/waves.min.js"></script>
     <script src="https://code.iconify.design/iconify-icon/1.0.4/iconify-icon.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
     @yield('js')
     @stack('js')
