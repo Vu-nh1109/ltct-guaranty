@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use DB;
 use App\Petition;
 use Illuminate\Http\Request;
+use GuzzleHttp\Client;
+use App\Http\Controllers\ApiController;
 
 class PetitionController extends Controller
 {
@@ -37,18 +39,31 @@ class PetitionController extends Controller
     public function showPetition($id)
     {
         $petition = Petition::findOrFail($id);
-        return view('admin_petition', [
-            'petition' => $petition,
-            'quantity' => $this->getProductQuantity($petition->product_id)
-        ]);
+        $apiController = app(ApiController::class);
+        $product = $apiController->productExist($petition->order_id, $petition->product_id);
+        if ($product == 502) {
+            return view('error', [
+                'code' => 502,
+                'message' => "Couldn't connect to Payment Moldule SP_01!"
+            ]);
+        } else {
+            return view('admin_petition', [
+                'petition' => $petition,
+                'warehouse_quantity' => $this->getProductQuantity($petition->product_id),
+                'product_name' => $product['productName'],
+                'order_quantity' => $product['quantity']
+            ]);
+        }
     }
 
     public function handlePetition(Request $request, $id)
     {
         $petition = Petition::find($id);
+        $apiController = app(ApiController::class);
+        $product = $apiController->productExist($petition->order_id, $petition->product_id);
         switch ($request->input('action')) {
             case 'accept':
-                if (!$petition->type && $this->getProductQuantity($petition->product_id) <= 0) {
+                if (!$petition->type && $this->getProductQuantity($petition->product_id) < $product['quantity']) {
                 } else {
                     $this->acceptPetition($petition);
                 }
@@ -84,7 +99,7 @@ class PetitionController extends Controller
 
     public function sendExchangeRequest($order_id)
     {
-        $client = new \GuzzleHttp\Client();
+        $client = new Client();
         $request = $client->post('https://sp-05-backend.onrender.com/api/confirm/exchange/' . $order_id);
         $response = json_decode($request->getBody(), true);
         return $response['status'];
@@ -92,7 +107,7 @@ class PetitionController extends Controller
 
     public function sendReturnRequest($order_id)
     {
-        $client = new \GuzzleHttp\Client();
+        $client = new Client();
         $request = $client->post('https://sp-05-backend.onrender.com/api/confirm/return/' . $order_id);
         $response = json_decode($request->getBody(), true);
         return $response['status'];
@@ -100,11 +115,9 @@ class PetitionController extends Controller
 
     public function getProductQuantity($product_id)
     {
-        $client = new \GuzzleHttp\Client();
+        $client = new Client();
         $request = $client->request('GET', 'https://ltct-warehouse-backend.onrender.com/api/product/item/' . $product_id);
         $response = json_decode($request->getBody(), true);
         return $response['quantity'];
     }
-
-    
 }

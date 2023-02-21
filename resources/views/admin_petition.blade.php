@@ -12,12 +12,10 @@
             @method('PUT')
             <div class="row">
                 <div class="col">
-                    @if (isset($product_name))
                     <div class="form-group">
                         <label style="font-weight: bold;" class="control-label">Product name:</label>
                         {{ $product_name }}
                     </div>
-                    @endif
 
                     <div class="form-group">
                         <label style="font-weight: bold;" class="control-label">Order id:</label>
@@ -65,11 +63,19 @@
                     <div class="form-group">
                         @if(!$petition->type)
                         <label style="font-weight: bold;" class="control-label" for="quantity">Product Quantity in Warehouse:</label>
-                        {{ $quantity }}
+                        {{ $warehouse_quantity }}
                         @endif
                     </div>
+
                     <div class="form-group">
-                        @if(!$quantity)
+                        @if(!$petition->type)
+                        <label style="font-weight: bold;" class="control-label" for="quantity">Number of product to be exchanged:</label>
+                        {{ $order_quantity }}
+                        @endif
+                    </div>
+
+                    <div class="form-group">
+                        @if(!$warehouse_quantity)
                         <button disabled class="btn btn-success" data-toggle="tooltip" title="Not enough quantity to accept">Accept</button>
                         @else
                         <button type="submit" class="btn btn-success" name="action" value="accept">Accept</button>

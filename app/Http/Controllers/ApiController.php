@@ -4,29 +4,39 @@ namespace App\Http\Controllers;
 
 use App\Petition;
 use Illuminate\Http\Request;
+use GuzzleHttp\Client;
 
 class ApiController extends Controller
 {
     public function show($order_id, $product_id)
     {
-        if ($data = self::productExist($order_id, $product_id)) {
+        $data = self::productExist($order_id, $product_id);
+        if ($data == null) {
+            return view('error', [
+                'code' => 404,
+                'message' => "Order or Product doesn't exist!"
+            ]);
+        } elseif ($data == 502) {
+            return view('error', [
+                'code' => 502,
+                'message' => "Couldn't connect to Payment Moldule SP_01!"
+            ]);
+        } else {
             if ($petition = Petition::where([
                 ['order_id', '=', $order_id],
                 ['product_id', '=', $product_id],
             ])->first()) {
                 return view('show_petition', [
                     'petition' => $petition,
-                    // 'product_name' => $data['productName']
+                    'product_name' => $data['productName']
                 ]);
             } else {
                 return view('add_petition', [
                     'order_id' => $order_id,
                     'product_id' => $product_id,
-                    // 'product_name' => $data['productName']
+                    'product_name' => $data['productName']
                 ]);
             }
-        } else {
-            abort(404, "Order or Product doesn't exist!");
         }
     }
 
@@ -57,20 +67,19 @@ class ApiController extends Controller
 
     public function productExist($order_id, $product_id)
     {
-        $client = new \GuzzleHttp\Client();
+        $client = new Client();
         $request = $client->request('GET', 'http://103.179.173.95:81/api/getOrderById/' . $order_id);
-
-        if(!$response = json_decode($request->getBody(), true)){
-            return response('Bad Gateway', 502);
-            // abort(502, "Couldn't connect to Payment Module SP_01");
-        } else {
+        $response = json_decode($request->getBody(), true);
+        if ($response != null) {
             foreach ($response[0]['products'] as $product) {
                 if ($product['productId'] == intval($product_id)) {
                     return $product;
                 }
             }
+            return null;
+        } else {
+            return 502;
         }
-        return null;
     }
 
     protected function hasImage($request, $image)
