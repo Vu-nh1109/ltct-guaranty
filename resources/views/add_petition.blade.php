@@ -11,6 +11,13 @@
             @csrf
             <div class="row">
                 <div class="col">
+                    @if (isset($product_name))
+                        <div class="form-group">
+                            <label style="font-weight: bold;" class="control-label">Product name:</label>
+                            <input disabled name="order_id" type="text" class="form-control" value="{{ $product_name }}">
+                        </div>
+                    @endif
+
                     <div class="form-group">
                         <label style="font-weight: bold;" class="control-label">Order id:</label>
                         <input disabled name="order_id" type="text" class="form-control" value="{{ $order_id }}">

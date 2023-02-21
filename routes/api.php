@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\ApiController;
-use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,11 +13,8 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::get('/order/{order_id}', [ApiController::class, 'getOrder']);
+Route::get('/product/{order_id}/{product_id}', [ApiController::class, 'productExist']);
 Route::get('/petition/{order_id}/{product_id}', [ApiController::class, 'show']);
 Route::post('/petition/{order_id}/{product_id}/create', [ApiController::class,'store'])->name('petition.store');
 
 
-// Route::middleware('auth:api')->get('/user', function (Request $request) {
-//     return $request->user();
-// });

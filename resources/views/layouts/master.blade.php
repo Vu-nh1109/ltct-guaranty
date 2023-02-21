@@ -27,6 +27,17 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fsvs/1.2.2/css/style.css" type="text/css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.css" type="text/css">
 
+    <style>
+		body {
+			background-color: #2a3042;
+		}
+
+        .card {
+            background-color: #fff; 
+            min-height: 100vh;
+        }
+	</style>
+
 </head>
 
 <body>
@@ -40,7 +51,11 @@
 
 
     <!-- Content -->
-    @yield('content')
+        <div class="card mx-auto" style="width: 80rem;">
+            <div class="card-body">
+                @yield('content')
+            </div>
+        </div>
     <!-- Content -->
 
     @yield('js')

@@ -55,6 +55,7 @@ class PetitionController extends Controller
                 break;
             case 'refuse':
                 $petition->status = 0;
+                toastr()->success('Petition Request Refused Successfully!');
                 break;
             case 'return':
                 $petition->type = 1;
@@ -63,6 +64,22 @@ class PetitionController extends Controller
         }
         $petition->save();
         return back();
+    }
+
+    protected function acceptPetition(Petition $petition)
+    {
+        if (!$petition->type) {
+            $result = $this->sendExchangeRequest($petition->order_id);
+        } else {
+            $result = $this->sendReturnRequest($petition->order_id);
+        }
+
+        if ($result = 'success') {
+            $petition->status = 1;
+            toastr()->success('Petition Request Accepted Successfully!');
+        } else {
+            toastr()->error("Couldn't connect to Accounting Module");
+        }
     }
 
     public function sendExchangeRequest($order_id)
@@ -89,19 +106,5 @@ class PetitionController extends Controller
         return $response['quantity'];
     }
 
-    protected function acceptPetition(Petition $petition)
-    {
-        if (!$petition->type) {
-            $result = $this->sendExchangeRequest($petition->order_id);
-        } else {
-            $result = $this->sendReturnRequest($petition->order_id);
-        }
-
-        if ($result = 'success') {
-            $petition->status = 1;
-            toastr()->success('Petition Request Accepted Successfully!');
-        } else {
-            toastr()->error("Couldn't connect to Accounting Module");
-        }
-    }
+    
 }

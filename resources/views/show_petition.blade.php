@@ -9,6 +9,13 @@
         <h2 class="text-center mb-3 h2"> Showing petition </h2>
         <div class="row">
             <div class="col">
+                @if (isset($product_name))
+                    <div class="form-group">
+                        <label style="font-weight: bold;"class="control-label">Product name:</label>
+                        {{ $product_name }}
+                    </div>
+                @endif
+
                 <div class="form-group">
                     <label style="font-weight: bold;"class="control-label">Order id:</label>
                     {{ $petition->order_id }}
@@ -74,7 +81,6 @@
     </div>
 </div>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script type="text/javascript">
     $('img[data-enlargeable]').addClass('img-enlargeable').click(function() {
         var src = $(this).attr('src');
