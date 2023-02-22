@@ -88,4 +88,11 @@
         }
     }
 </script>
+
+@if (Session::has('toastr_message'))
+    <script>
+        toastr.error("{{ Session::get('toastr_message') }}");
+    </script>
+@endif
+
 @endsection

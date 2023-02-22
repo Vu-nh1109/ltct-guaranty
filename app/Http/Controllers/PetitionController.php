@@ -7,6 +7,8 @@ use App\Petition;
 use Illuminate\Http\Request;
 use GuzzleHttp\Client;
 use App\Http\Controllers\ApiController;
+use Illuminate\Support\Facades\Session;
+use GuzzleHttp\Exception\ServerException;
 
 class PetitionController extends Controller
 {
@@ -42,9 +44,11 @@ class PetitionController extends Controller
         $apiController = app(ApiController::class);
         $product = $apiController->productExist($petition->order_id, $petition->product_id);
         if ($product == 502) {
-            return view('error', [
-                'code' => 502,
-                'message' => "Couldn't connect to Payment Moldule SP_01!"
+            Session::flash('toastr_message', "Couldn't connect to Payment Moldule SP_01!");
+            return view('admin_petition', [
+                'petition' => $petition,
+                'warehouse_quantity' => $this->getProductQuantity($petition->product_id),
+                'toastr_message' => Session::get('toastr_message')
             ]);
         } else {
             return view('admin_petition', [
@@ -93,31 +97,55 @@ class PetitionController extends Controller
             $petition->status = 1;
             toastr()->success('Petition Request Accepted Successfully!');
         } else {
-            toastr()->error("Couldn't connect to Accounting Module");
+            toastr()->error("Couldn't connect to Accounting Module SP_05!");
         }
     }
 
     public function sendExchangeRequest($order_id)
     {
         $client = new Client();
-        $request = $client->post('https://sp-05-backend.onrender.com/api/confirm/exchange/' . $order_id);
+        try {
+            $request = $client->post('https://sp-05-backend.onrender.com/api/confirm/exchange/' . $order_id);
+        } catch (ServerException $e) {
+            return null;
+        }
         $response = json_decode($request->getBody(), true);
-        return $response['status'];
+        if ($response != null) {
+            return $response['status'];
+        } else {
+            return null;
+        }
     }
 
     public function sendReturnRequest($order_id)
     {
         $client = new Client();
-        $request = $client->post('https://sp-05-backend.onrender.com/api/confirm/return/' . $order_id);
+        try {
+            $request = $client->post('https://sp-05-backend.onrender.com/api/confirm/return/' . $order_id);
+        } catch (ServerException $e) {
+            return null;
+        }
         $response = json_decode($request->getBody(), true);
-        return $response['status'];
+        if ($response != null) {
+            return $response['status'];
+        } else {
+            return null;
+        }
     }
 
     public function getProductQuantity($product_id)
     {
         $client = new Client();
-        $request = $client->request('GET', 'https://ltct-warehouse-backend.onrender.com/api/product/item/' . $product_id);
+        try {
+            $request = $client->request('GET', 'https://ltct-warehouse-backend.onrender.com/api/product/item/' . $product_id);
+        } catch (ServerException $e) {
+            return null;
+        }
         $response = json_decode($request->getBody(), true);
-        return $response['quantity'];
+        if ($response != null) {
+            return $response['quantity'];
+        } else {
+            return null;
+        }
     }
 }

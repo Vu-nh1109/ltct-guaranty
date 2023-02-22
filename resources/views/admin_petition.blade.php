@@ -12,10 +12,12 @@
             @method('PUT')
             <div class="row">
                 <div class="col">
+                    @if (isset($product_name))
                     <div class="form-group">
                         <label style="font-weight: bold;" class="control-label">Product name:</label>
                         {{ $product_name }}
                     </div>
+                    @endif
 
                     <div class="form-group">
                         <label style="font-weight: bold;" class="control-label">Order id:</label>
@@ -62,11 +64,18 @@
                     @case(2)
                     <div class="form-group">
                         @if(!$petition->type)
+                        @if(isset($warehouse_quantity))
                         <label style="font-weight: bold;" class="control-label" for="quantity">Product Quantity in Warehouse:</label>
                         {{ $warehouse_quantity }}
+                        @else
+                        <script>
+                            toastr.error("Can't connect to Warehouse Module!");
+                        </script>
+                        @endif
                         @endif
                     </div>
 
+                    @if (isset($order_quantity))
                     <div class="form-group">
                         @if(!$petition->type)
                         <label style="font-weight: bold;" class="control-label" for="quantity">Number of product to be exchanged:</label>
@@ -74,6 +83,18 @@
                         @endif
                     </div>
 
+                    <div class="form-group">
+                        @if($warehouse_quantity < $order_quantity)
+                        <button disabled class="btn btn-success" data-toggle="tooltip" title="Not enough quantity to accept">Accept</button>
+                        @else
+                        <button type="submit" class="btn btn-success" name="action" value="accept">Accept</button>
+                        @endif
+                        <button type="submit" class="btn btn-danger" name="action" value="refuse">Refuse</button>
+                        @if(!$petition->type)
+                        <button type="submit" class="btn btn-primary" name="action" value="return">Switch to return</button>
+                        @endif
+                    </div>
+                    @else
                     <div class="form-group">
                         @if(!$warehouse_quantity)
                         <button disabled class="btn btn-success" data-toggle="tooltip" title="Not enough quantity to accept">Accept</button>
@@ -85,6 +106,9 @@
                         <button type="submit" class="btn btn-primary" name="action" value="return">Switch to return</button>
                         @endif
                     </div>
+                    @endif
+
+                    
                     @break
                     @case(1)
                     <div class="form-group">
@@ -136,4 +160,10 @@
         });
     });
 </script>
+
+@if (Session::has('toastr_message'))
+<script>
+    toastr.error("{{ Session::get('toastr_message') }}");
+</script>
+@endif
 @endsection

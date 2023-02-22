@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Petition;
 use Illuminate\Http\Request;
 use GuzzleHttp\Client;
+use Illuminate\Support\Facades\Session;
+use GuzzleHttp\Exception\ServerException;
 
 class ApiController extends Controller
 {
@@ -17,10 +19,22 @@ class ApiController extends Controller
                 'message' => "Order or Product doesn't exist!"
             ]);
         } elseif ($data == 502) {
-            return view('error', [
-                'code' => 502,
-                'message' => "Couldn't connect to Payment Moldule SP_01!"
-            ]);
+            Session::flash('toastr_message', "Couldn't connect to Payment Moldule SP_01!");
+            if ($petition = Petition::where([
+                ['order_id', '=', $order_id],
+                ['product_id', '=', $product_id],
+            ])->first()) {
+                return view('show_petition', [
+                    'petition' => $petition,
+                    'toastr_message' => Session::get('toastr_message')
+                ]);
+            } else {
+                return view('add_petition', [
+                    'order_id' => $order_id,
+                    'product_id' => $product_id,
+                    'toastr_message' => Session::get('toastr_message')
+                ]);
+            }
         } else {
             if ($petition = Petition::where([
                 ['order_id', '=', $order_id],
@@ -61,14 +75,17 @@ class ApiController extends Controller
 
         $data['type'] = $request->input('type');
         $data->save();
-
         return back();
     }
 
     public function productExist($order_id, $product_id)
     {
         $client = new Client();
-        $request = $client->request('GET', 'http://103.179.173.95:81/api/getOrderById/' . $order_id);
+        try {
+            $request = $client->request('GET', 'http://103.179.173.95:81/api/getOrderById/' . $order_id);
+        } catch (ServerException $e) {
+            return 502;
+        }
         $response = json_decode($request->getBody(), true);
         if ($response != null) {
             foreach ($response[0]['products'] as $product) {
