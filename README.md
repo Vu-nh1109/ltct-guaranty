@@ -1,6 +1,6 @@
 # Project về Module Bảo hành và đổi trả hàng
-Truy cập `localhost:8000/api/pettion/{order_id}/{product_id}` để tạo 1 form yêu caafu đổi trả
-Truy cập `localhost:8000/pettions` để hiển thị list các yêu cầu đã tạo
+## Truy cập `localhost:8000/api/pettion/{order_id}/{product_id}` để tạo 1 form yêu caafu đổi trả
+## Truy cập `localhost:8000/pettions` để hiển thị list các yêu cầu đã tạo
 - Click "Link" trên 1 hàng để hiển thị chi tiết yêu cầu
 - Click "Accept", "Refuse" hay "Switch to Return" để thực hiện xử lý yêu cầu
 
